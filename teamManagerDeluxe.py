@@ -8,57 +8,70 @@ class Team(object):
     self.jersey = jersey
     self.position = position
 
+  #The next following lines define the printStats function
+  def getStats(self):
+    print("Name:" + self.name)
+    print("Age:" + self.age)
+    print("Goals:" + self.goals)
+    print("Jersey:" + self.jersey)
+    print("Position:" + self.position)
+
 def saveTeam(playerList, filename):
   # open the file
-  my_file = open(filname, "a")
+  my_file = open((filename), 'a')
   # write to the file
-  for self in playerList:
-   playList = []
-   save(self.name + ' ' + str(self.age) + ' ' + str(self.goals) + ' ' + str(self.jersey) + ' ' + self.position + '\n')
+  for p in playerList:
+   save(p.name + ' ' + str(p.age) + ' ' + str(p.goals) + ' ' + str(p.jersey) + ' ' + p.position + '\n')
   # close the file
   my_file.close()
-  # placeholder - delete once the function is complete
+  
+  def loadTeam(list, filename):
+  # create empty list
+  list=[]
+  # open the file
+  my_file = open((filename), 'r')
+  # read each line and create Player from it (use a loop)
+  myreads = my_file.readline()
+      # split each line into a list of the variables
+  while myreads != '':
+      splitList= myreads.split()
+      list.append(Player(splitList[0], splitList[1], splitList[2], splitList[3], splitList[4]))
+      # read each next line
+      myreads = my_file.readline()
+  # close the file
+  my_file.close()
+  # return the completed list
+  return list
 
+print("Hi, welcome to teamManagerDeluxe.py! What do you want to do? Enter the number of your choice and then hit Enter.")
+print("(a)Start a new team")
+print("(b)Open an existing file")
+ab = raw_input()
 
-  def loadTeam(filename):
-    # create empty list
-    empty=[]
-    # open the file
-# read each line and create Player from it (use a loop)
+if ab == "b":
+  print("What's the filename for your existing team?(include the .tmd or the .txt)")
+  filename = raw_input()
+  list = loadTeam(list, filename)
+  print("Here are all the players that were in that file.")
+  
+  elif ab == "a":
+  print(" ")
+  playerList = []
 
-
-        # split each line into a list of the variables
-
-        # read each next line
-
-    # close the file
-    filename.close()
-    # return the completed list
-    for info in empty:
-      info.filename()
-    # placeholder - delete once the function is complete
-    pass
-
-#The next following lines define the printStats function
-  def getStats(self):
-    seperate = getstats.split()
-    print(self.name  + self.age  )
 # In the following line I crated an empty list for the players called myPlayers
 myPlayers = []
 players = True
 
-# In the next following lines I ask the user what they would like to view, and to enter in the number of what they choose to do
-print("Hi, welcome to teamManagerDeluxe.py! What do you want to do? Enter the number of your choice and then hit Enter.")
 print("(1) Add a player")
 print("(2) View all players")
-print("(3) Open up a file with team members")
+print("(3) Save this file with team members")
 print("(0) Exit the program")
 answer = raw_input()
 
 # The next line of code is for when the user wants to exit the program, because it won't print anything, it'll exit
 while answer != "0":
 
-# The next following lines of code are for when the user enters 1, and they have to enter the name, age, and the number of goals that the player has. After it will ask them what their next steps will be
+# The next following lines of code are for when the user enters 1, and they have to enter the name, age, and the number of goals that the player has. A$
   if answer == "1":
     print("We need the following information about your player:")
     print("Name:")
@@ -71,25 +84,31 @@ while answer != "0":
     jersey = raw_input()
     print("Position:")
     position = raw_input()
+
     myPlayers.append(Team(name,age,goals,jersey,position))
-    print("What do you want to do? Enter the number of your choice and then hit Enter.")
     print("(1) Add a player")
     print("(2) View all players")
-    print("(3) Save your player list to a file")
+    print("(3) Save this file with team members")
     print("(0) Exit the program")
     answer = raw_input()
-elif answer == "2":
+
+# The next following lines of code are for when the  user chooses to enter 2 and it will allow them to see the stats and then ask them once again what $
+  elif answer == "2":
     print("Current stats:")
     for info in myPlayers:
      info.getStats()
-    print("What do you want to do? Enter the number of your choice and then hit Enter.")
-    print("(1) Add Player")
+    print("(1) Add a player")
     print("(2) View all players")
-    print("(3) Save your player list to a file")
+    print("(3) Save this file with team members")
     print("(0) Exit the program")
     answer = raw_input()
 
   elif answer == "3":
     print("What would you like to name the file? (Remember that we will add the .tmd)")
-    choice = raw_input()
-    saveTeam(playerList, choice)
+    savedfile = raw_input()
+    saveTeam(playerList, savedfile)
+    print("(1) Add a player")
+    print("(2) View all players")
+    print("(3) Save this file with team members")
+    print("(0) Exit the program")
+    answer = raw_input()
